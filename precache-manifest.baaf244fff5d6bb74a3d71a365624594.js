@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "62f22f5943aab58a1a950963cb735d8d",
+    "revision": "964281678579b42b0f866daf995b0a93",
     "url": "/tarkov-tools/index.html"
   },
   {
