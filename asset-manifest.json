@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/tarkov-tools/static/css/main.b6a7ff3c.chunk.css",
-    "main.js": "/tarkov-tools/static/js/main.12d86127.chunk.js",
-    "main.js.map": "/tarkov-tools/static/js/main.12d86127.chunk.js.map",
+    "main.js": "/tarkov-tools/static/js/main.13b98db7.chunk.js",
+    "main.js.map": "/tarkov-tools/static/js/main.13b98db7.chunk.js.map",
     "runtime-main.js": "/tarkov-tools/static/js/runtime-main.a7ca280c.js",
     "runtime-main.js.map": "/tarkov-tools/static/js/runtime-main.a7ca280c.js.map",
     "static/js/2.a63f13e1.chunk.js": "/tarkov-tools/static/js/2.a63f13e1.chunk.js",
     "static/js/2.a63f13e1.chunk.js.map": "/tarkov-tools/static/js/2.a63f13e1.chunk.js.map",
     "index.html": "/tarkov-tools/index.html",
-    "precache-manifest.f12a30d832e191128e65d8e0334ce5ff.js": "/tarkov-tools/precache-manifest.f12a30d832e191128e65d8e0334ce5ff.js",
+    "precache-manifest.730f03adf26badc9c91806b6fb35ad98.js": "/tarkov-tools/precache-manifest.730f03adf26badc9c91806b6fb35ad98.js",
     "service-worker.js": "/tarkov-tools/service-worker.js",
     "static/css/main.b6a7ff3c.chunk.css.map": "/tarkov-tools/static/css/main.b6a7ff3c.chunk.css.map",
     "static/js/2.a63f13e1.chunk.js.LICENSE.txt": "/tarkov-tools/static/js/2.a63f13e1.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.a7ca280c.js",
     "static/js/2.a63f13e1.chunk.js",
     "static/css/main.b6a7ff3c.chunk.css",
-    "static/js/main.12d86127.chunk.js"
+    "static/js/main.13b98db7.chunk.js"
   ]
 }
