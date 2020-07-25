@@ -190,7 +190,7 @@ const Graph = props => {
                         x={151}
                     />
                 }
-                x={() => 80}
+                x={() => 85}
             />
             <VictoryLabel
                 text="Class 1"
