@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/tarkov-tools/precache-manifest.140cfbd1c887a531e53f89b9ad0db5d2.js"
+  "/tarkov-tools/precache-manifest.fd7fc2e344edd22fd6b366a22add1c7a.js"
 );
 
 self.addEventListener('message', (event) => {
