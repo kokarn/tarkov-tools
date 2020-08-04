@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/tarkov-tools/static/css/main.b6a7ff3c.chunk.css",
-    "main.js": "/tarkov-tools/static/js/main.6e1414e1.chunk.js",
-    "main.js.map": "/tarkov-tools/static/js/main.6e1414e1.chunk.js.map",
+    "main.css": "/tarkov-tools/static/css/main.050523cc.chunk.css",
+    "main.js": "/tarkov-tools/static/js/main.bf25286f.chunk.js",
+    "main.js.map": "/tarkov-tools/static/js/main.bf25286f.chunk.js.map",
     "runtime-main.js": "/tarkov-tools/static/js/runtime-main.a7ca280c.js",
     "runtime-main.js.map": "/tarkov-tools/static/js/runtime-main.a7ca280c.js.map",
-    "static/js/2.65d8f29a.chunk.js": "/tarkov-tools/static/js/2.65d8f29a.chunk.js",
-    "static/js/2.65d8f29a.chunk.js.map": "/tarkov-tools/static/js/2.65d8f29a.chunk.js.map",
+    "static/js/2.1fc39890.chunk.js": "/tarkov-tools/static/js/2.1fc39890.chunk.js",
+    "static/js/2.1fc39890.chunk.js.map": "/tarkov-tools/static/js/2.1fc39890.chunk.js.map",
     "index.html": "/tarkov-tools/index.html",
-    "precache-manifest.c96b9bed603a2531c6d21465a8a08704.js": "/tarkov-tools/precache-manifest.c96b9bed603a2531c6d21465a8a08704.js",
+    "precache-manifest.8641512e6e618d99c0c2bbdca042b6aa.js": "/tarkov-tools/precache-manifest.8641512e6e618d99c0c2bbdca042b6aa.js",
     "service-worker.js": "/tarkov-tools/service-worker.js",
-    "static/css/main.b6a7ff3c.chunk.css.map": "/tarkov-tools/static/css/main.b6a7ff3c.chunk.css.map",
-    "static/js/2.65d8f29a.chunk.js.LICENSE.txt": "/tarkov-tools/static/js/2.65d8f29a.chunk.js.LICENSE.txt"
+    "static/css/main.050523cc.chunk.css.map": "/tarkov-tools/static/css/main.050523cc.chunk.css.map",
+    "static/js/2.1fc39890.chunk.js.LICENSE.txt": "/tarkov-tools/static/js/2.1fc39890.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a7ca280c.js",
-    "static/js/2.65d8f29a.chunk.js",
-    "static/css/main.b6a7ff3c.chunk.css",
-    "static/js/main.6e1414e1.chunk.js"
+    "static/js/2.1fc39890.chunk.js",
+    "static/css/main.050523cc.chunk.css",
+    "static/js/main.bf25286f.chunk.js"
   ]
 }
