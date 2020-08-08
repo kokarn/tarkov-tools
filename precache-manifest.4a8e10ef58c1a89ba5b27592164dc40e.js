@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e53d00f76b40e31ae2ce284950140e82",
+    "revision": "fec2bdf8962f1b9c7c9d196373c90257",
     "url": "/tarkov-tools/index.html"
   },
   {
-    "revision": "66c63ba3a0936fd72476",
+    "revision": "b05f8d100d848cd56fa9",
     "url": "/tarkov-tools/static/css/main.ffee9b14.chunk.css"
   },
   {
-    "revision": "e6ced65c1b8c1a783170",
-    "url": "/tarkov-tools/static/js/2.9380a1c3.chunk.js"
+    "revision": "a5d69e0b68222f99b432",
+    "url": "/tarkov-tools/static/js/2.98c19c0a.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/tarkov-tools/static/js/2.9380a1c3.chunk.js.LICENSE.txt"
+    "url": "/tarkov-tools/static/js/2.98c19c0a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "66c63ba3a0936fd72476",
-    "url": "/tarkov-tools/static/js/main.57f5d45d.chunk.js"
+    "revision": "b05f8d100d848cd56fa9",
+    "url": "/tarkov-tools/static/js/main.6610a47f.chunk.js"
   },
   {
     "revision": "d20dd10bd72295ae52f6",
@@ -40,12 +40,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tarkov-tools/static/media/dorms.82dc1823.jpg"
   },
   {
-    "revision": "c963b13897ed4b3b7451818e20a4af7b",
-    "url": "/tarkov-tools/static/media/factory.c963b138.jpg"
+    "revision": "d40cf980810ebb0a2780c3e397898fb1",
+    "url": "/tarkov-tools/static/media/factory.d40cf980.jpg"
   },
   {
     "revision": "01a202372425384e67f3c7111f7190d7",
     "url": "/tarkov-tools/static/media/interchange.01a20237.jpg"
+  },
+  {
+    "revision": "0b286ca7faedb1edd68674d06f97cbc0",
+    "url": "/tarkov-tools/static/media/labs.0b286ca7.jpg"
   },
   {
     "revision": "c82fc9b58b56a59d5653f52c165a17c0",
@@ -56,8 +60,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tarkov-tools/static/media/resort.eb86f4bf.jpg"
   },
   {
-    "revision": "3c5cb456ed9a15dc4fcdd0cdff98358f",
-    "url": "/tarkov-tools/static/media/shoreline.3c5cb456.jpg"
+    "revision": "a4ddafbdfcbfbf4543dd5cf8bec2ad49",
+    "url": "/tarkov-tools/static/media/shoreline.a4ddafbd.jpg"
   },
   {
     "revision": "b4f3dbf76a58b977272eed3685db481a",
