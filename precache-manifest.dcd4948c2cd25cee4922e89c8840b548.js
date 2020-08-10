@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3d8c3994ed1e4f78a36da4a1af6cdeed",
+    "revision": "076f11f78ed704cc54c2ce39a06092ba",
     "url": "/tarkov-tools/index.html"
   },
   {
-    "revision": "26d104a7df935f375c6e",
+    "revision": "4438e1bba18bc9038863",
     "url": "/tarkov-tools/static/css/main.efe86cfd.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tarkov-tools/static/js/2.cc3a9e27.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "26d104a7df935f375c6e",
-    "url": "/tarkov-tools/static/js/main.996db634.chunk.js"
+    "revision": "4438e1bba18bc9038863",
+    "url": "/tarkov-tools/static/js/main.294fc402.chunk.js"
   },
   {
     "revision": "d20dd10bd72295ae52f6",
