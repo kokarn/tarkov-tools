@@ -25,7 +25,7 @@ import Debug from './components/Debug';
 import rawMapData from './data/maps.json';
 import useStateWithLocalStorage from './hooks/useStateWithLocalStorage';
 
-const Ammo = React.lazy(() => import ('./pages/Ammo.jsx'));
+const Ammo = React.lazy(() => import ('./pages/ammo/'));
 const Control = React.lazy(() => import('./pages/control'));
 const LootTier = React.lazy(() => import('./pages/LootTier.jsx'));
 const Barters = React.lazy(() => import('./pages/barters'));
