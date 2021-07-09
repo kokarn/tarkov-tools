@@ -32,10 +32,10 @@
     "react-switch": "^6.0.0",
     "react-table": "^7.6.2",
     "react-zoom-pan-pinch": "^2.0.2",
+    "recharts": "^2.0.9",
     "redux-thunk": "^2.3.0",
     "resize-observer-polyfill": "^1.5.1",
-    "source-map-explorer": "^2.5.2",
-    "victory": "^35.3.1"
+    "source-map-explorer": "^2.5.2"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
