@@ -7,12 +7,10 @@ import {
     VictoryLine,
     VictoryLabel,
     VictoryAxis,
-    // VictoryContainer,
-    // VictoryTooltip,
-    // VictoryVoronoiContainer,
-    VictoryContainer,
+    VictoryTooltip,
+    VictoryVoronoiContainer,
 } from 'victory';
-import {useHistory} from 'react-router-dom';
+// import {useHistory} from 'react-router-dom';
 
 import Symbol from './Symbol.jsx';
 // import GraphLabel from './GraphLabel';
@@ -146,8 +144,8 @@ const getArmorLabel = (tier, yMax, xMax) => {
 };
 
 const Graph = props => {
-    const history = useHistory();
-    const handleOnClick = (id) => history.push(`/item/${id.toString()}`);
+    // const history = useHistory();
+    // const handleOnClick = (id) => history.push(`/item/${id.toString()}`);
 
     return (
         <VictoryChart
@@ -169,13 +167,14 @@ const Graph = props => {
                 y: MAX_PENETRATION,
                 x: MAX_DAMAGE,
             }}
-            containerComponent={
-                <VictoryContainer
-                  style={{
-                    touchAction: "auto"
-                  }}
-                />
-              }
+            // containerComponent={
+            //     <VictoryContainer
+            //       style={{
+            //         touchAction: "auto"
+            //       }}
+            //     />
+            // }
+            containerComponent={<VictoryVoronoiContainer/>}
         >
             <VictoryAxis
                 axisLabelComponent={<VictoryLabel x={177}/>}
@@ -189,7 +188,7 @@ const Graph = props => {
                 tickValues={[10, 20, 30, 40, 50, 60, 70]}
                 style = {styles.yaxis}
             />
-            <VictoryScatter
+            {/* <VictoryScatter
                 dataComponent = {<Symbol
                     link = {true}
                 />}
@@ -218,14 +217,12 @@ const Graph = props => {
                 data={props.listState}
                 x="damage"
                 y="penetration"
-            />
-            {/* <VictoryScatter
+            /> */}
+            <VictoryScatter
                 dataComponent = {<Symbol />}
                 style={styles.scatter}
-                labelComponent={<VictoryLabel dy={-3} />}
-                // labelComponent={<VictoryTooltip
-                //     labelComponent = {<VictoryLabel dy={-3} />}
-                // />}
+                // labelComponent={<VictoryLabel dy={-3} />}
+                labelComponent={<VictoryTooltip />}
                 labels={({ datum }) => {
                     return datum.name;
                 }}
@@ -234,7 +231,7 @@ const Graph = props => {
                 data={props.listState}
                 x="damage"
                 y="penetration"
-            /> */}
+            />
             <VictoryLegend
                 data={props.legendData}
                 dataComponent = {<Symbol
