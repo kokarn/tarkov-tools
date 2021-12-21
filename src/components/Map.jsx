@@ -48,6 +48,14 @@ function Map() {
     const { displayText, image, source, sourceLink } = maps[currentMap];
     const infoString = `Escape from Tarkov ${displayText} map`;
 
+    const options = {
+        initialScale: 1,
+        centerOnInit: true,
+        wheel: {
+            step: 0.2,
+        }
+    };
+
     return [
         <Helmet>
             <meta
@@ -68,24 +76,23 @@ function Map() {
                 sourceLink = {sourceLink}
             />
             <TransformWrapper
-                initialScale={1}
-                centerOnInit = {true}
-                wheel = {{
-                    step: 0.2,
-                }}
+            {...options}
             >
-                <TransformComponent>
-                    <div
-                        className = 'map-image-wrapper'
-                    >
-                        <img
-                            alt = {`Map of ${ displayText }`}
-                            className = 'map-image'
-                            title = {infoString}
-                            src = {`${ process.env.PUBLIC_URL }${ image }`}
-                        />
-                    </div>
-                </TransformComponent>
+                {({resetTransform, ...rest}) => (
+                    <TransformComponent>
+                        <div
+                            className = 'map-image-wrapper'
+                        >
+                            <img
+                                alt = {`Map of ${ displayText }`}
+                                className = 'map-image'
+                                title = {infoString}
+                                src = {`${ process.env.PUBLIC_URL }${ image }`}
+                                onLoad={() => resetTransform()}
+                            />
+                        </div>
+                    </TransformComponent>
+                )}
             </TransformWrapper>
         </div>
     ];
