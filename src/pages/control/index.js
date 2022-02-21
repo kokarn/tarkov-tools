@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import Connect from './Connect.jsx';
 import { selectAllItems, fetchItems } from '../../features/items/itemsSlice';
+import useStateWithLocalStorage from '../../hooks/useStateWithLocalStorage';
+import makeID from '../../modules/make-id';
 
 import ammoData from '../../data/ammo.json';
 import mapData from '../../data/maps.json';
@@ -68,6 +70,8 @@ function Control(props) {
     });
     const socketConnected = useSelector((state) => state.sockets.connected);
     const { t } = useTranslation();
+
+    const [ownSessionId] = useStateWithLocalStorage('sessionId', makeID(4));
 
     useEffect(() => {
         let timer = false;
@@ -236,6 +240,19 @@ function Control(props) {
                 )}
             </div>
             <Connect />
+            <div className="sub-control-wrapper">
+                <hr />
+                <div className="info-wrapper">
+                    To control this window use the following ID down below.
+                </div>
+                <input
+                    name="own-session-id"
+                    value={ownSessionId}
+                    readOnly={true}
+                    type="text"
+                    style={{ maxWidth: (ownSessionId.length + 4) + 'ch' }}
+                />
+            </div>
         </div>
     );
 }

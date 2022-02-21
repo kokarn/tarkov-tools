@@ -63,3 +63,25 @@
     position: relative;
     top: 1px;
 }
+
+.sub-control-wrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 0px;
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.sub-control-wrapper hr {
+    width: 100%;
+}
+
+.sub-control-wrapper input {
+    font-size: larger;
+    text-align: center;
+}
