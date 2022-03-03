@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import doFetchItems from './do-fetch-items';
+import doFetchItems, { doFetchItemByNormalizedName } from './do-fetch-items';
 
 export const useItemsQuery = (queryOptions) => {
     const itemsQuery = useQuery('items', () => doFetchItems(), {
@@ -23,13 +23,31 @@ export const useItemByIdQuery = (itemId, queryOptions) => {
 };
 
 export const useItemByNameQuery = (itemName, queryOptions) => {
+    // doFetchItemByNormalizedName(itemName).then((a) => {
+    //     console.log({ a });
+    // });
+
     const itemQuery = useItemsQuery({
         select: (items) =>
             items.find((item) => item.normalizedName === itemName),
         ...queryOptions,
     });
 
-    return itemQuery;
+    const singleItemQuery = useQuery(['items', itemName], () =>
+        doFetchItemByNormalizedName(itemName),
+    );
+
+    console.log(singleItemQuery);
+
+    console.log(itemQuery);
+
+    if (itemQuery.data) {
+        console.log('all', itemQuery.data);
+        return itemQuery;
+    }
+
+    console.log('single', singleItemQuery.data);
+    return singleItemQuery;
 };
 
 export const useItemsWithTypeQuery = (type, queryOptions) => {
