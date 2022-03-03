@@ -23,30 +23,26 @@ export const useItemByIdQuery = (itemId, queryOptions) => {
 };
 
 export const useItemByNameQuery = (itemName, queryOptions) => {
-    // doFetchItemByNormalizedName(itemName).then((a) => {
-    //     console.log({ a });
-    // });
-
     const itemQuery = useItemsQuery({
         select: (items) =>
             items.find((item) => item.normalizedName === itemName),
         ...queryOptions,
     });
 
-    const singleItemQuery = useQuery(['items', itemName], () =>
-        doFetchItemByNormalizedName(itemName),
+    // Do a fast query to only fetch a basic version of the item we want
+    const singleItemQuery = useQuery(
+        ['items', itemName],
+        () => doFetchItemByNormalizedName(itemName),
+        {
+            enabled: !Boolean(itemQuery.data),
+        },
     );
 
-    console.log(singleItemQuery);
-
-    console.log(itemQuery);
-
+    // But when we have all data, use that
     if (itemQuery.data) {
-        console.log('all', itemQuery.data);
         return itemQuery;
     }
 
-    console.log('single', singleItemQuery.data);
     return singleItemQuery;
 };
 
