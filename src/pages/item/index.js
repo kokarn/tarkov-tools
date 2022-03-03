@@ -285,7 +285,6 @@ function Item() {
                             <img
                                 alt={currentItemData.name}
                                 className={'item-image'}
-                                loading="lazy"
                                 height={62}
                                 width={62}
                                 src={currentItemData.iconLink}
