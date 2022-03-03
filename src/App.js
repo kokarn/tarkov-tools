@@ -68,7 +68,7 @@ import ItemTracker from './pages/item-tracker/';
 import Hideout from './pages/hideout';
 import WipeLength from './pages/wipe-length';
 import About from './pages/about/';
-// import GunBuilder from './pages/gun-builder';
+import GunBuilder from './pages/gun-builder';
 
 import Guides from './pages/guides';
 
@@ -699,18 +699,18 @@ function App() {
                         remoteControlSessionElement,
                     ]}
                 />
-                {/* <Route
-                path="/gun-builder"
-                element = {[
-                    <div
-                        className="display-wrapper"
-                        key = 'gun-builder-wrapper'
-                    >
-                        <GunBuilder />
-                    </div>,
-                    remoteControlSessionElement
-                ]}
-            /> */}
+                <Route
+                    path="/gun-builder"
+                    element={[
+                        <div
+                            className="display-wrapper"
+                            key="gun-builder-wrapper"
+                        >
+                            <GunBuilder />
+                        </div>,
+                        remoteControlSessionElement,
+                    ]}
+                />
                 <Route
                     path="*"
                     element={[<ErrorPage />, remoteControlSessionElement]}

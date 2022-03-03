@@ -382,6 +382,31 @@ const doFetchItems = async (...a) => {
             };
         });
 
+        if (rawItem.itemProperties.defAmmo) {
+            rawItem.defAmmo = rawItem.itemProperties.defAmmo;
+
+            delete rawItem.itemProperties.defAmmo;
+        }
+
+        if (rawItem.itemProperties.InitialSpeed) {
+            rawItem.initialSpeed = rawItem.itemProperties.InitialSpeed;
+
+            delete rawItem.itemProperties.InitialSpeed;
+        }
+
+        if (rawItem.itemProperties.CenterOfImpact) {
+            rawItem.centerOfImpact = rawItem.itemProperties.CenterOfImpact;
+
+            delete rawItem.itemProperties.CenterOfImpact;
+        }
+
+        if (rawItem.itemProperties.SightingRange) {
+            rawItem.itemProperties.sightingRange =
+                rawItem.itemProperties.SightingRange;
+
+            delete rawItem.itemProperties.SightingRange;
+        }
+
         return {
             ...rawItem,
             fee: calculateFee(rawItem.avg24hPrice, rawItem.basePrice),
@@ -399,6 +424,7 @@ const doFetchItems = async (...a) => {
             }),
             canHoldItems: itemProps[rawItem.id]?.canHoldItems,
             equipmentSlots: itemProps[rawItem.id]?.slots || [],
+            allowedAmmoIds: itemProps[rawItem.id]?.allowedAmmoIds,
         };
     });
 
