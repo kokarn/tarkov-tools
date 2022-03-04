@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import doFetchItems from './do-fetch-items';
+import doFetchItems, { doFetchItemByNormalizedName } from './do-fetch-items';
 
 export const useItemsQuery = (queryOptions) => {
     const itemsQuery = useQuery('items', () => doFetchItems(), {
@@ -29,7 +29,21 @@ export const useItemByNameQuery = (itemName, queryOptions) => {
         ...queryOptions,
     });
 
-    return itemQuery;
+    // Do a fast query to only fetch a basic version of the item we want
+    const singleItemQuery = useQuery(
+        ['items', itemName],
+        () => doFetchItemByNormalizedName(itemName),
+        {
+            enabled: !Boolean(itemQuery.data),
+        },
+    );
+
+    // But when we have all data, use that
+    if (itemQuery.data) {
+        return itemQuery;
+    }
+
+    return singleItemQuery;
 };
 
 export const useItemsWithTypeQuery = (type, queryOptions) => {

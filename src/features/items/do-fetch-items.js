@@ -6,62 +6,155 @@ const NOTES = {
     '60a2828e8689911a226117f9': `Can't store Pillbox, Day Pack, LK 3F or MBSS inside`,
 };
 
-const QueryBody = JSON.stringify({
+const ItemPropertiesPart = `
+id
+bsgCategoryId
+name
+shortName
+basePrice
+normalizedName
+types
+width
+height
+avg24hPrice
+wikiLink
+changeLast48h
+low24hPrice
+high24hPrice
+lastLowPrice
+gridImageLink
+iconLink
+updated
+traderPrices {
+    price
+    trader {
+        name
+    }
+}
+sellFor {
+    source
+    price
+    requirements {
+        type
+        value
+    }
+    currency
+}
+buyFor {
+    source
+    price
+    currency
+    requirements {
+        type
+        value
+    }
+}
+containsItems {
+    count
+    item {
+        id
+    }
+}
+`;
+
+const AllItemsQueryBody = JSON.stringify({
     query: `{
         itemsByType(type:any){
-            id
-            bsgCategoryId
-            name
-            shortName
-            basePrice
-            normalizedName
-            types
-            width
-            height
-            avg24hPrice
-            wikiLink
-            changeLast48h
-            low24hPrice
-            high24hPrice
-            lastLowPrice
-            gridImageLink
-            iconLink
-            updated
-            traderPrices {
-                price
-                trader {
-                    name
-                }
-            }
-            sellFor {
-                source
-                price
-                requirements {
-                    type
-                    value
-                }
-                currency
-            }
-            buyFor {
-                source
-                price
-                currency
-                requirements {
-                    type
-                    value
-                }
-            }
-            containsItems {
-                count
-                item {
-                    id
-                }
-            }
+            ${ItemPropertiesPart}
         }
     }`,
 });
 
-const doFetchItems = async (...a) => {
+const getItemByNormalizedNameQueryBody = (normalizedName) =>
+    JSON.stringify({
+        query: `query ItemByNormalizedName($normalizedName: String!){
+            itemByNormalizedName(normalizedName:$normalizedName){
+                ${ItemPropertiesPart}
+            }
+        }`,
+        variables: {
+            normalizedName,
+        },
+    });
+
+const mapItem = (rawItem) => {
+    let item = { ...rawItem };
+
+    item.buyFor = item.buyFor.sort((a, b) => {
+        return (
+            getRublePrice(a.price, a.currency) -
+            getRublePrice(b.price, b.currency)
+        );
+    });
+
+    if (!Array.isArray(item.linkedItems)) {
+        item.linkedItems = [];
+    }
+
+    item.sellFor = item.sellFor.map((sellPrice) => {
+        return {
+            ...sellPrice,
+            source: camelcaseToDashes(sellPrice.source),
+        };
+    });
+
+    item.buyFor = item.buyFor.map((buyPrice) => {
+        return {
+            ...buyPrice,
+            source: camelcaseToDashes(buyPrice.source),
+        };
+    });
+
+    item = {
+        ...item,
+        fee: calculateFee(item.avg24hPrice, item.basePrice),
+        fallbackImageLink: `${process.env.PUBLIC_URL}/images/unknown-item-icon.jpg`,
+        slots: item.width * item.height,
+        iconLink: item.iconLink,
+        grid: false,
+        notes: NOTES[item.id],
+        traderPrices: item.traderPrices.map((traderPrice) => {
+            return {
+                price: traderPrice.price,
+                trader: traderPrice.trader.name,
+            };
+        }),
+        canHoldItems: undefined,
+        equipmentSlots: [],
+    };
+
+    const bestTraderPrice = item.traderPrices
+        .sort((a, b) => {
+            return b.price - a.price;
+        })
+        .shift();
+
+    item.traderPrice = bestTraderPrice?.price || 0;
+    item.traderName = bestTraderPrice?.trader || '?';
+
+    return item;
+};
+
+export const doFetchItemByNormalizedName = async (normalizedName) => {
+    const response = await fetch('https://tarkov-tools.com/graphql', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+        },
+        body: getItemByNormalizedNameQueryBody(normalizedName),
+    }).then((response) => response.json());
+
+    if (!response?.data?.itemByNormalizedName) {
+        return null;
+    }
+
+    const item = mapItem(response?.data?.itemByNormalizedName);
+
+    return item;
+};
+
+const doFetchItems = async () => {
     const [itemData, itemGrids, itemProps] = await Promise.all([
         fetch('https://tarkov-tools.com/graphql', {
             method: 'POST',
@@ -69,7 +162,7 @@ const doFetchItems = async (...a) => {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
             },
-            body: QueryBody,
+            body: AllItemsQueryBody,
         }).then((response) => response.json()),
         fetch(`${process.env.PUBLIC_URL}/data/item-grids.min.json`).then(
             (response) => response.json(),
@@ -78,9 +171,9 @@ const doFetchItems = async (...a) => {
             (response) => response.json(),
         ),
     ]);
-
-    const allItems = itemData.data.itemsByType.map((rawItem) => {
+    const allItems = itemData.data.itemsByType.map((rawItemIn) => {
         let grid = false;
+        let rawItem = mapItem(rawItemIn);
 
         rawItem.itemProperties = itemProps[rawItem.id]?.itemProperties || {};
         rawItem.linkedItems = itemProps[rawItem.id]?.linkedItems || {};
@@ -124,31 +217,6 @@ const doFetchItems = async (...a) => {
             }
         }
 
-        rawItem.buyFor = rawItem.buyFor.sort((a, b) => {
-            return (
-                getRublePrice(a.price, a.currency) -
-                getRublePrice(b.price, b.currency)
-            );
-        });
-
-        if (!Array.isArray(rawItem.linkedItems)) {
-            rawItem.linkedItems = [];
-        }
-
-        rawItem.sellFor = rawItem.sellFor.map((sellPrice) => {
-            return {
-                ...sellPrice,
-                source: camelcaseToDashes(sellPrice.source),
-            };
-        });
-
-        rawItem.buyFor = rawItem.buyFor.map((buyPrice) => {
-            return {
-                ...buyPrice,
-                source: camelcaseToDashes(buyPrice.source),
-            };
-        });
-
         if (rawItem.itemProperties.defAmmo) {
             rawItem.defAmmo = rawItem.itemProperties.defAmmo;
 
@@ -176,19 +244,7 @@ const doFetchItems = async (...a) => {
 
         return {
             ...rawItem,
-            fee: calculateFee(rawItem.avg24hPrice, rawItem.basePrice),
-            fallbackImageLink: `${process.env.PUBLIC_URL}/images/unknown-item-icon.jpg`,
-            slots: rawItem.width * rawItem.height,
-            // iconLink: `https://assets.tarkov-tools.com/${rawItem.id}-icon.jpg`,
-            iconLink: rawItem.iconLink,
             grid: grid,
-            notes: NOTES[rawItem.id],
-            traderPrices: rawItem.traderPrices.map((traderPrice) => {
-                return {
-                    price: traderPrice.price,
-                    trader: traderPrice.trader.name,
-                };
-            }),
             canHoldItems: itemProps[rawItem.id]?.canHoldItems,
             equipmentSlots: itemProps[rawItem.id]?.slots || [],
             allowedAmmoIds: itemProps[rawItem.id]?.allowedAmmoIds,
@@ -210,9 +266,9 @@ const doFetchItems = async (...a) => {
 
                 localTraderPrice.price = item.containsItems.reduce(
                     (previousValue, currentValue) => {
-                        const partPrice = itemMap[
+                        const partPrice = itemMap?.[
                             currentValue.item.id
-                        ].traderPrices.find(
+                        ]?.traderPrices.find(
                             (innerTraderPrice) =>
                                 innerTraderPrice.name === localTraderPrice.name,
                         );
@@ -236,9 +292,9 @@ const doFetchItems = async (...a) => {
 
                 sellFor.price = item.containsItems.reduce(
                     (previousValue, currentValue) => {
-                        const partPrice = itemMap[
+                        const partPrice = itemMap?.[
                             currentValue.item.id
-                        ].sellFor.find(
+                        ]?.sellFor.find(
                             (innerSellFor) =>
                                 innerSellFor.source === sellFor.source,
                         );

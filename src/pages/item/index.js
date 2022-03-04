@@ -285,7 +285,6 @@ function Item() {
                             <img
                                 alt={currentItemData.name}
                                 className={'item-image'}
-                                loading="lazy"
                                 height={62}
                                 width={62}
                                 src={currentItemData.iconLink}
@@ -652,8 +651,14 @@ function Item() {
                         <PriceGraph itemId={currentItemData.id} />
                     </div>
                 )}
-                <h2>{t('Stats')}</h2>
-                <PropertyList properties={currentItemData.itemProperties} />
+                {Boolean(currentItemData?.itemProperties) && (
+                    <>
+                        <h2>{t('Stats')}</h2>
+                        <PropertyList
+                            properties={currentItemData.itemProperties}
+                        />
+                    </>
+                )}
                 <div>
                     <div className="item-barters-headline-wrapper">
                         <h2>
